@@ -1,0 +1,5 @@
+blue_vpc                 = "blue-vpc"
+blue_vpc_cidr_block      = "172.16.0.0/16"
+blue_subnet_cidr_block   = "172.16.10.0/24"
+blue_subnet_az           = "us-east-1b"
+blue_amazon_linux_ami_id = "ami-0f34c5ae932e6f0e4"

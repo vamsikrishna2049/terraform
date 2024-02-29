@@ -1,0 +1,1 @@
+use alias(terraform function) - to deploy multiple regions and to reduce the code duplicay use terraform modules.

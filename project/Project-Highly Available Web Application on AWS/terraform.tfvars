@@ -1,0 +1,11 @@
+prefix           = "dev"
+instance_tenancy = "default"
+pub_subnet_count = 4
+pvt_subnet_count = 2
+pub_azs          = ["us-west-2a", "us-west-2b", "us-west-2c", "us-west-2d"]
+pvt_azs          = ["us-west-2a", "us-west-2b", "us-west-2c", "us-west-2d"]
+instance_type    = "t2.micro"
+environment      = "developer"
+ami_id           = "ami-01e82af4e524a0aa3" #US-WEST-2 Amazon Linux
+#ami_id          = "ami-008fe2fc65df48dac" # US-WEST-2 Ubuntu
+templateVersion = 1

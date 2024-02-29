@@ -1,0 +1,9 @@
+#TF-Var VPC Declaration
+vpc_name             = "TF-VPC"
+vpc_cidr_block       = "10.0.0.0/16"
+instance_tenancy     = "default"
+enable_dns_hostnames = "true"
+#TF-Var SUBNET Declaration
+subnet_cidr_block       = "10.0.1.0/24"
+availability_zone       = "us-east-1a"
+map_public_ip_on_launch = "true"

@@ -1,0 +1,2 @@
+variable "ipAddress" {}
+variable "prefix" {}

@@ -1,0 +1,11 @@
+#values passing from here
+red_vpc                 = "red-vpc"
+white_vpc               = "white-vpc"
+red_vpc_cidr_block      = "10.0.0.0/16"
+white_vpc_cidr_block    = "192.168.0.0/16"
+red_subnet_cidr_block   = "10.0.10.0/24"
+white_subnet_cidr_block = "192.168.10.0/24"
+red_subnet_az           = "us-east-1a"
+white_subnet_az         = "us-east-1c"
+red_rhel_ami_id         = "ami-026ebd4cfe2c043b2"
+white_ubuntu_ami_id     = "ami-053b0d53c279acc90"

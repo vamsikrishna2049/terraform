@@ -1,0 +1,2 @@
+As a DevOps Admin, we will maintained several infrastructure's. We don't know who worked on which infrastructure.
+In order to get all the details in a centralized location we need to store the state S3 Bucket.

@@ -1,0 +1,1 @@
+how to launch an EC2 machine in a AWS Cloud Environment.

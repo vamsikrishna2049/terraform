@@ -1,0 +1,10 @@
+variable "prefix" {}
+variable "instance_tenancy" {}
+variable "pub_subnet_count" {}
+variable "pvt_subnet_count" {}
+variable "pvt_azs" {}
+variable "pub_azs" {}
+variable "instance_type" {}
+variable "environment" {}
+variable "ami_id" {}
+variable "templateVersion" {}

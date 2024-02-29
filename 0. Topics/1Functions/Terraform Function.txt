@@ -1,0 +1,16 @@
+cidrsubnets	To divide a CIDR block into a given number of equal-sized subnets
+	cidrsubnets(base_cidr, number_of_subnets)
+	cidrsubnets("10.0.0.0/16", 4)
+----------------------------------------------------------------------------------
+cidrsubnet	To calculate a specific subnet within a CIDR block
+	cidrsubnet(base_cidr, new_prefix_length, index)
+	cidrsubnet("172.16.0.0/12", 4, 2)			172.18.0.0/16
+	cidrsubnet("10.1.2.0/24", 4, 15)			10.1.2.240/28
+	cidrsubnet("fd00:fd12:3456:7890::/56", 16, 162)		fd00:fd12:3456:7800:a200::/72
+----------------------------------------------------------------------------------
+Lookup		
+----------------------------------------------------------------------------------
+Conditional
+----------------------------------------------------------------------------------
+Alias		
+----------------------------------------------------------------------------------
