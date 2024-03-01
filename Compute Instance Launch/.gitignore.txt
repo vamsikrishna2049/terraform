@@ -1,0 +1,9 @@
+# Ignore Vagrant files
+VagrantRHEL/
+VagrantUbuntu/
+*.pem
+*.ppk
+.terraform.*
+terraform.*
+.gitignore
+keys.*

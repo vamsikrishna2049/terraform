@@ -1,0 +1,19 @@
+Step 1: Install Gcloud SDK, python, VSCode
+
+Step 2: After Completion of GCloud SDK, configure the Cloud SDK with GCP Credentials like Project name 
+
+Step 3: Open VSCode and download cloud code from market place
+
+Step 4: Connect the VSCode with GCP Cloud.
+
+Step 5: Open GCloud and goto "IAM" 
+				-> Service Accounts 
+				->Create Service Account 
+					->Enter Service account details (like TF manager) 
+					->Grant this service account access to the project (Role- basic-editor)
+					->Done
+Step 6: Edit the created service account
+	Go to keys -> Add Key	-> New Key -> JSON ->Create.
+Automatically, it will Download the JSON File
+
+Step 7: Save this Crednetails Key file in our workspace and start work.
