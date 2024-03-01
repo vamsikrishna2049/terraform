@@ -1,2 +1,2 @@
 # terraform
-My Personal Learnings
+My Learnings in Terraform
