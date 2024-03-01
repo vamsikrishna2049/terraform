@@ -101,10 +101,10 @@
 #   }
 # }
 
-# # Creating a key pair for EC2 Instance
-# resource "aws_key_pair" "default" {
+# # Creating a key pair for EC2 Instance - create the new public key and use it.
+# resource "aws_key_pair" "default" { 
 #   key_name   = "TFCode"
-#   public_key = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDOdNpkBe9+W5d3SlZT5N0PgzbuWpKCVxrg4smPmvZNWVYSk+xejefPrh+/zB8fY6ly4FnhrqEHJJWvLErf/94Vqn3oMHvnw5iOVZ6BJysIN1geSpAmvOMB4HoT9Aw004EiqtuOuuenCzOgnI8dYM4u+d0zoGmxzvJZ2OtcaQ18kJr9WfNvlLc48q0Ly1UsUVhyG5WSVqLcQe+qfrex8+p9lzLFWrmz/ICRDHwN3RON+uesJ7LIs5ZfCc7+7Pjr/4kR5sdJOozQUOXNU4kGL6j7kaBEPnTPDn16mMIbxQk55g9cyP4KZmKYcAJFF97BcOD57P4mSY8zPr7/v+l3Rrh/ krishnap201997@gmail.com"
+#   public_key = "ssh-rsa G/cb2TuHm+hvYFb9053yQsTqA1egF28As5H k@gmail.com"
 #   tags = {
 #     Name = "TFCode"
 #   }
