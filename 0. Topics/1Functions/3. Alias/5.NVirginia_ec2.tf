@@ -1,14 +1,14 @@
-# # # Creating a key pair for EC2 Instance
-# # resource "aws_key_pair" "TFCode" {
-# #   key_name   = "TFCode"
-# #   public_key = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCTlxrRoONTY8I49Ox7ZiUJ4tlZQ0yE8ZcB77k+B0Ut70Np+lckJfPOfQWayIKX1P7apk3EtR0eQ4opSUrYC/99SLf/M+o7dVKBh2zlwexszCxWk9zeWa2StWovHroVhdgEIjdH+UNDOhSYjCbX31UNnWTMxZ+YqZlYZ7olO5QklOHmxyilJcaBeDP+dCc6oeyaBW1afRxCXGrPdxNNBFiDUW7nzBj4xecxJxsEw6HW7PsKEyops4JVeL+l3w6GdkrNSMSeRXBTiKHJ8JqdShJxoqLYpw8fb6NV9g0GUarBsRHvw3ySWk545EZLANh5tSGZmFebegZAXXR3lKJDLHsf TFCode"
-# #   tags = {
-# #     Name = "TFCode"
-# #   }
-# # }
+# # Creating a key pair for EC2 Instance - create the new public key and use it.
+# resource "aws_key_pair" "default" { 
+#   key_name   = "TFCode"
+#   public_key = "ssh-rsa G/cb2TuHm+hvYFb9053yQsTqA1egF28As5H k@gmail.com"
+#   tags = {
+#     Name = "TFCode"
+#   }
+# }
 
-# #Note:
-# # you can skip creating keypair, if any key pair is avaialble in your cloud account. else create a keypair and mention the name.
+#Note:
+# you can skip creating keypair, if any key pair is avaialble in your cloud account. else create a keypair and mention the name.
 
 # #Public Subnet
 # resource "aws_instance" "Nvirg-public-servers" {

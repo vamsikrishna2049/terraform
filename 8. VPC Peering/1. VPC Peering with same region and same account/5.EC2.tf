@@ -1,11 +1,11 @@
-#Creating a key pair for EC2 Instance
-resource "aws_key_pair" "default" {
-  key_name   = "TFCode"
-  public_key = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQClLjy/D0U1oZLyVWC5ygvoSrITtysBfgOPXXD3j2AWNA7slUs3tcSFSOtCgmYn1P2J1B1hkutKkRn9RAPTJ7InREF1o/M55Md+dGlFM/rLOxrtvGCMwSbIyQ3vvcqE/HCB2kdzZzCZOcAxhdu8dGQOg3fEOV77dEiELQIwKUpm6ica1OkSZEQ9S5qn6YSQrQReCOV2ajBf4WZZaWNft387dmoqqDdrgCSg9rwcy9iFPTvsVqEy5PW5QWdlxDBnWvmw3flmtMr8JTmacMUvbRCbCwwsoa7gcBGKeq9AeWarjgIMmWuD3uBrsQLzqcG9PpGfvCIBUqSqkr9CRcMn8IP5 TFCode"
-  tags = {
-    Name = "TFCode"
-  }
-}
+# # Creating a key pair for EC2 Instance - create the new public key and use it.
+# resource "aws_key_pair" "default" { 
+#   key_name   = "TFCode"
+#   public_key = "ssh-rsa G/cb2TuHm+hvYFb9053yQsTqA1egF28As5H k@gmail.com"
+#   tags = {
+#     Name = "TFCode"
+#   }
+# }
 
 # # Define the EC2 instance in the Red VPC with RHEL
 # resource "aws_instance" "rhel" {

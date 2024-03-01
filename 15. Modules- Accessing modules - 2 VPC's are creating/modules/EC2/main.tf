@@ -8,14 +8,15 @@ module "vpc" {
 
 }
 
-# Creating a key pair for EC2 Instance
-resource "aws_key_pair" "default" {
-  key_name   = "TFCode"
-  public_key = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCi42B7pH8JnIdDhlArVEv186uPA/I2mTGtdCTPaxwuSzw1/ckaAgTN2kNXG/cb2TuHm+NC7AoaucQeYFuj55btZsclaHl9UIEZAVbO888EDdy7nKTZ7rrwgxRHCTzN01YqyZbzevvi5iQqkSom+Mj/0X2frFIgzykU/lBNV2hVcVDauWF/n2gbwBZD4f6tg160bmQvxMU3mgGxPeytsNs8ivQKN5Yd5s4PoPDNHzeJr4wTid4HygUy4uUi5ENiaYadMg0JP8GsgZdVqowwNmRMlJuuQbqWb51s42/rIs25qcwDgLtD96JbNs2MQz+hvYFb9053yQsTqA1egF28As5H k@gmail.com"
-  tags = {
-    Name = "TFCode"
-  }
-}
+# # Creating a key pair for EC2 Instance - create the new public key and use it.
+# resource "aws_key_pair" "default" { 
+#   key_name   = "TFCode"
+#   public_key = "ssh-rsa G/cb2TuHm+hvYFb9053yQsTqA1egF28As5H k@gmail.com"
+#   tags = {
+#     Name = "TFCode"
+#   }
+# }
+
 
 # Define the EC2 instance in public subnet's
 resource "aws_instance" "public_subnet" {
