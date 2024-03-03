@@ -1,0 +1,21 @@
+Project Title:
+--------------
+Highly Available Web Application on AWS
+
+Abstract: 
+---------
+This project outlines the design and implementation of a highly available web application architecture on Amazon Web Services (AWS). 
+The architecture utilizes various AWS services to ensure fault tolerance and redundancy, guaranteeing continuous application uptime and data integrity.
+
+Key components:
+----------------
+Elastic Load Balancing: Distributes incoming traffic across multiple Amazon EC2 instances for scalability and availability.
+Amazon EC2 Instances: Run the web application in an Auto Scaling Group configuration, automatically scaling up or down based on traffic demand.
+Amazon RDS: Hosts the application database in a multi-AZ deployment with a primary and standby instance for disaster recovery.
+
+Benefits:
+---------
+High availability: The architecture ensures application uptime even if individual components fail.
+Scalability: The infrastructure automatically scales to accommodate changing traffic demands.
+Fault tolerance: Redundancy in key components ensures data integrity and application resilience.
+Performance: CloudFront delivers static content from edge locations for fast loading times.
