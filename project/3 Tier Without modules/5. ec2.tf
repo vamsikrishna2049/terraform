@@ -10,7 +10,7 @@ resource "aws_instance" "WebServer" {
   tags = {
     Name = "${var.prefix}-WebServer" # Unique names for each instance
   }
-  user_data = file("${path.module}/webscript.sh")
+  user_data = file("${path.module}/script-web.sh")
 }
 
 #Provisioning the Baston Host(EC2 instance) in Public subnet - Baston Host Security Group
@@ -32,12 +32,12 @@ resource "aws_instance" "AppServer" {
   key_name                    = "vockey" # It was already created via management console. If you can also create by define key pair module.
   subnet_id                   = aws_subnet.pvt_sn1.id
   vpc_security_group_ids      = [aws_security_group.AppSG.id]
-  associate_public_ip_address = true
+  associate_public_ip_address = false
 
   tags = {
     Name = "${var.prefix}-AppServer" # Unique names for each instance
   }
   # User data script to provision the App server based on the Linux distribution
-  user_data = file("${path.module}/appscript.sh")
+  user_data = file("${path.module}/script-app.sh")
 }
 

@@ -126,74 +126,6 @@ resource "aws_route_table_association" "pvt_sn_ass3" {
   route_table_id = aws_route_table.pvt.id
 }
 
-# # Creating Network ACL for Web Subnet
-# resource "aws_network_acl" "web_acl" {
-#   vpc_id     = aws_vpc.main.id
-#   subnet_ids = [aws_subnet.pub_sn.id] # Replace aws_subnet.web with the actual subnet resource name for your web subnet
-
-#   tags = {
-#     Name = "${var.prefix}_web_acl"
-#   }
-# }
-
-# # Creating Network ACL for DB Subnet
-# resource "aws_network_acl" "db_acl" {
-#   vpc_id     = aws_vpc.main.id
-#   subnet_ids = [aws_subnet.pvt_sn2.id, aws_subnet.pvt_sn3.id] # Replace aws_subnet.db with the actual subnet resource name for your DB subnet
-
-#   tags = {
-#     Name = "${var.prefix}_db_acl"
-#   }
-# }
-
-# # Creating Network ACL Rule for Web Subnet Inbound Traffic
-# resource "aws_network_acl_rule" "web_acl_inbound_rule" {
-#   network_acl_id = aws_network_acl.web_acl.id
-#   rule_number    = 100
-#   protocol       = "tcp"
-#   rule_action    = "allow"
-#   cidr_block     = "0.0.0.0/0"
-#   from_port      = 80
-#   to_port        = 80
-#   egress         = false # This rule applies to inbound traffic
-# }
-
-# # Creating Network ACL Rule for Web Subnet Outbound Traffic
-# resource "aws_network_acl_rule" "web_acl_outbound_rule" {
-#   network_acl_id = aws_network_acl.web_acl.id
-#   rule_number    = 100
-#   protocol       = "tcp"
-#   rule_action    = "allow"
-#   cidr_block     = "0.0.0.0/0"
-#   from_port      = 1024
-#   to_port        = 65535
-#   egress         = true # This rule applies to outbound traffic
-# }
-
-# # Creating Network ACL Rule for DB Subnet Inbound Traffic
-# resource "aws_network_acl_rule" "db_acl_inbound_rule" {
-#   network_acl_id = aws_network_acl.db_acl.id
-#   rule_number    = 100
-#   protocol       = "tcp"
-#   rule_action    = "allow"
-#   cidr_block     = "10.0.1.0/24" # Assuming this is the CIDR block for your App subnet
-#   from_port      = 3306          # Assuming MySQL port
-#   to_port        = 3306          # Assuming MySQL port
-#   egress         = false         # This rule applies to inbound traffic
-# }
-
-# # Creating Network ACL Rule for DB Subnet Outbound Traffic
-# resource "aws_network_acl_rule" "db_acl_outbound_rule" {
-#   network_acl_id = aws_network_acl.db_acl.id
-#   rule_number    = 100
-#   protocol       = "tcp"
-#   rule_action    = "allow"
-#   cidr_block     = "0.0.0.0/0"
-#   from_port      = 1024 #ephemeral ports starts.
-#   to_port        = 65535 #ephemeral ports ends.
-#   egress         = true # This rule applies to outbound traffic
-# }
-
 # Creating - Web Server Security Group
 resource "aws_security_group" "WebSG" {
   vpc_id = aws_vpc.main.id
@@ -207,6 +139,13 @@ resource "aws_security_group" "WebSG" {
     to_port     = 22
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
+  }
+  
+  ingress {
+    from_port   = -1  # ICMP doesn't have ports, so use -1
+    to_port     = -1  # ICMP doesn't have ports, so use -1
+    protocol    = "icmp"
+    cidr_blocks = ["0.0.0.0/0"]  # Allow ICMP traffic from any source
   }
 
   ingress {
@@ -291,13 +230,7 @@ resource "aws_security_group" "AppSG" {
     protocol        = "-1"
     security_groups = [aws_security_group.WebSG.id]
   }
-  ingress {
-    description = "Allow ICMPv4 Traffic"
-    from_port   = -1 // ICMP has no ports, so set from_port and to_port to -1
-    to_port     = -1
-    protocol    = "icmp"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
+
   ingress {
     description     = "Allow traffic from BastionHostSG"
     from_port       = 0

@@ -52,7 +52,7 @@ output "BastonHostonServerId" {
   value = aws_instance.BastonHost.id
 }
 
-# #RDS instance ID
-# output "RDS_ID" {
-#   value = aws_db_instance.primary.id
-# }
+#RDS instance ID
+output "RDS_ID" {
+  value = aws_db_instance.primary.id
+}
