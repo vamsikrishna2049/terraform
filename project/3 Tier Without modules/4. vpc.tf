@@ -270,17 +270,17 @@ resource "aws_security_group" "DbSG" {
   # Edit inbound rules to allow traffic from AppSG and BastionHostSG
   ingress {
     description     = "Allow traffic from AppSG"
-    from_port       = 0
-    to_port         = 0
-    protocol        = "-1"
+    from_port       = 3306
+    to_port         = 3306
+    protocol        = "TCP"
     security_groups = [aws_security_group.AppSG.id]
   }
 
   ingress {
     description     = "Allow traffic from BastionHostSG"
-    from_port       = 0
-    to_port         = 0
-    protocol        = "-1"
+    from_port       = 3306
+    to_port         = 3306
+    protocol        = "TCP"
     security_groups = [aws_security_group.BastionHostSG.id]
   }
 
