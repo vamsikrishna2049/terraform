@@ -140,12 +140,21 @@ resource "aws_security_group" "WebSG" {
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
-  
+
   ingress {
-    from_port   = -1  # ICMP doesn't have ports, so use -1
-    to_port     = -1  # ICMP doesn't have ports, so use -1
+    description     = "Allow traffic from App SG"
+    from_port       = 22
+    to_port         = 22
+    protocol        = "TCP"
+    security_groups = [aws_security_group.AppSG.id]
+  }
+
+  ingress {
+    description = "Works for Ping"
+    from_port   = -1 # ICMP doesn't have ports, so use -1
+    to_port     = -1 # ICMP doesn't have ports, so use -1
     protocol    = "icmp"
-    cidr_blocks = ["0.0.0.0/0"]  # Allow ICMP traffic from any source
+    cidr_blocks = ["0.0.0.0/0"] # Allow ICMP traffic from any source
   }
 
   ingress {
@@ -179,7 +188,7 @@ resource "aws_security_group" "WebSG" {
 }
 
 # Creating - Bastion Host Server Security Group
-resource "aws_security_group" "BastonHostSG" {
+resource "aws_security_group" "BastionHostSG" {
   vpc_id = aws_vpc.main.id
   name   = "${var.prefix}_bastion_sg"
   # description = "Created by using TerraForm"
@@ -222,21 +231,20 @@ resource "aws_security_group" "AppSG" {
   name   = "${var.prefix}_app_sg"
   # description = "Created by using TerraForm"
 
-  # Edit inbound rules to allow traffic from WebSG and BastionHostSG
   ingress {
-    description     = "Allow traffic from WebSG"
-    from_port       = 0
-    to_port         = 0
-    protocol        = "-1"
-    security_groups = [aws_security_group.WebSG.id]
+    description = "Works for Ping"
+    from_port   = -1 # ICMP doesn't have ports, so use -1
+    to_port     = -1 # ICMP doesn't have ports, so use -1
+    protocol    = "icmp"
+    cidr_blocks = ["0.0.0.0/0"] # Allow ICMP traffic from any source
   }
 
   ingress {
     description     = "Allow traffic from BastionHostSG"
-    from_port       = 0
-    to_port         = 0
-    protocol        = "-1"
-    security_groups = [aws_security_group.BastonHostSG.id]
+    from_port       = 22
+    to_port         = 22
+    protocol        = "TCP"
+    security_groups = [aws_security_group.BastionHostSG.id]
   }
 
   # Edit outbound rules
@@ -254,7 +262,7 @@ resource "aws_security_group" "AppSG" {
 }
 
 # Creating - Database Server Security Group
-resource "aws_security_group" "DB_SG" {
+resource "aws_security_group" "DbSG" {
   vpc_id = aws_vpc.main.id
   name   = "${var.prefix}_database_sg"
   # description = "Created by using TerraForm"
@@ -273,7 +281,7 @@ resource "aws_security_group" "DB_SG" {
     from_port       = 0
     to_port         = 0
     protocol        = "-1"
-    security_groups = [aws_security_group.BastonHostSG.id]
+    security_groups = [aws_security_group.BastionHostSG.id]
   }
 
   # Edit outbound rules
