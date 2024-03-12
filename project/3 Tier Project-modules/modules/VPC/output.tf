@@ -1,31 +1,26 @@
-#Module Name
-output "prefix" {
-  value = var.prefix
-}
-
 #VPCID
 output "vpc_id" {
   value = aws_vpc.main.id
 }
 
-#VPC CIDR Block 
-output "vpc_cidr_block" {
-  value = aws_vpc.main.cidr_block
+#Public Subnets-1 
+output "public_subnetId" {
+  value = aws_subnet.pub_sn.id
 }
 
-#Public Subnets - Webserver
-output "WebServer_subnetId" {
-  value = aws_subnet.WebServer.id
+#Private Subnet-1
+output "private_subnetId1" {
+  value = aws_subnet.pvt_sn1.id
 }
 
-#Public Subnets -Baston Host
-output "BastonHost_subnetId" {
-  value = aws_subnet.BastonHost.id
+#Private Subnet-2
+output "private_subnetId2" {
+  value = aws_subnet.pvt_sn2.id
 }
 
-#Private Subnets - App Sever
-output "AppServer_subnetId" {
-  value = aws_subnet.AppSever.id
+#Private Subnet-3
+output "private_subnetId3" {
+  value = aws_subnet.pvt_sn3.id
 }
 
 #Internet Gateway
@@ -33,17 +28,22 @@ output "internet_gateway_id" {
   value = aws_internet_gateway.igw.id
 }
 
-#Security Groups
-output "security_group_id" {
-  value = aws_security_group.tf-sg.id
+#Security Groups -Web SG
+output "WebSG" {
+  value = aws_security_group.WebSG.id
 }
 
-#Routing Tables-Public
-output "public_routing_table" {
-  value = aws_route_table.pub.id
+#Security Groups -Bastion Host SG
+output "BastionHostSGID" {
+  value = aws_security_group.BastionHostSG.id
 }
 
-#Routing Tables-Private
-output "private_routing_table" {
-  value = aws_route_table.pvt.id
+#Security Groups-App SG
+output "AppSGID" {
+  value = aws_security_group.AppSG.id
+}
+
+#Security Groups -DB SG
+output "DbSGID" {
+  value = aws_security_group.DbSG.id
 }

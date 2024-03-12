@@ -1,6 +1,6 @@
 Project Title:
 --------------
-Highly Available Web Application on AWS
+3 Tier architecture
 
 Abstract: 
 ---------
@@ -19,3 +19,9 @@ High availability: The architecture ensures application uptime even if individua
 Scalability: The infrastructure automatically scales to accommodate changing traffic demands.
 Fault tolerance: Redundancy in key components ensures data integrity and application resilience.
 Performance: CloudFront delivers static content from edge locations for fast loading times.
+
+How to connect app server from bastion host?
+1. Connect to Bastion Host through ssh (port22) -Linux
+2. create an empty file and copy the pem file from local and paste it in the empty file and save it.
+3. Apply the permissions chmod 400 <empty file name>
+4. ssh -i <empty file name> ec2-user@<private ip address of app server> -> amazon linux.

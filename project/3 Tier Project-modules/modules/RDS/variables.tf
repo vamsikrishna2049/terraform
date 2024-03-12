@@ -1,6 +1,5 @@
-variable "pub_sn_1" {}
-variable "pub_sn_2" {}
-variable "pub_sn_3" {}
-variable "vpc_id" {}
 variable "prefix" {}
+variable "vpc_id" {}
+variable "private_subnetId2" {}
+variable "private_subnetId3" {}
 variable "security_group_id" {}

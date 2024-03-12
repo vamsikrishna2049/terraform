@@ -7,26 +7,26 @@ if [ -f /etc/os-release ]; then
     if [[ $NAME == *"Amazon Linux"* ]]; then
         # Install and start Apache on Amazon Linux
         sudo yum install httpd -y
-        sudo systemctl start httpd
-        sudo systemctl enable httpd
-        
+        sudo systemctl start httpd.service
+        sudo systemctl enable httpd.service
+
         # Create an index.html file with a deployment message
-        sudo sh -c "echo '<h1>Terraform on prefix-pub</h1>' > /var/www/html/index.html"
+        sudo sh -c "echo '<h1>This web page is coming from amazon linux launched  on AWS cloud. This is a HTTPD Web server.</h1>' > /var/www/html/index.html"
 
     # Update package repository and install Apache on Ubuntu/Debian
-    elif [[ $NAME == "Ubuntu" || $NAME == "Debian" ]]; then
+    elif [[ $NAME == "Ubuntu" ]]; then
         sudo apt-get update
         sudo apt-get install -y nginx
         sudo systemctl start nginx
         sudo systemctl enable nginx
 
         # Create an index.html file with a deployment message
-        sudo sh -c "echo '<h1>Deployed via Terraform on ${var.prefix}-pvt-${count.index + 1}</h1>' > sudo tee /var/www/html/index.nginx-debian.html"
+        sudo sh -c "echo '<h1>This web page is coming from Ubuntu linux launched  on AWS cloud. This is a nginx Web server.</h1>' > sudo tee /var/www/html/index.nginx-debian.html"
     else
-        echo "This is not an Ubuntu or Red Hat (Amazon Linux) instance."
+        echo "This is $NAME Linux distribution."
         exit 1
     fi
 else
-    echo "Unable to determine Linux distribution."
+    echo "Unable to find the Linux distribution."
     exit 1
 fi

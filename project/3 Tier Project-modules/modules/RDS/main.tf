@@ -1,45 +1,45 @@
 # Creating DB Subnet Group for RDS
 resource "aws_db_subnet_group" "subnet_groups" {
-  subnet_ids = [var.pub_sn_1, var.pub_sn_2, var.pub_sn_3]
-  name       = "${var.prefix}-db_subnet_group"
+  subnet_ids = [var.private_subnetId2, var.private_subnetId3]
+  name       = "${var.prefix}_db_subnet_group"
   
   tags = {
-    Name = "${var.prefix}-db-subnet-group"
+    Name = "${var.prefix}_db_subnet_group"
   }
 }
 
-# Security group for RDS - allowing port 3306(mysql)
-resource "aws_security_group" "sg" {
-  vpc_id = var.vpc_id
-  name   = "${var.prefix}-sg-name" # update this name with rds sg
-  # description = "Created by TerraForm"
+# # Security group for RDS - allowing port 3306(mysql)
+# resource "aws_security_group" "sg" {
+#   vpc_id = var.vpc_id
+#   name   = "${var.prefix}-sg-name" # update this name with rds sg
+#   # description = "Created by TerraForm"
 
-  ingress {
-    description     = "Allow port MYSQL"
-    from_port       = 3306
-    to_port         = 3306
-    protocol        = "tcp"
-    security_groups = [var.security_group_id]
-  }
+#   ingress {
+#     description     = "Allow port MYSQL"
+#     from_port       = 3306
+#     to_port         = 3306
+#     protocol        = "tcp"
+#     security_groups = [var.security_group_id]
+#   }
 
-  egress {
-    description = "Allow outbound traffic"
-    from_port   = 0
-    to_port     = 0
-    protocol    = "-1"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
+#   egress {
+#     description = "Allow outbound traffic"
+#     from_port   = 0
+#     to_port     = 0
+#     protocol    = "-1"
+#     cidr_blocks = ["0.0.0.0/0"]
+#   }
 
-  tags = {
-    Name = "rds-${var.prefix}-sg"
-  }
-}
+#   tags = {
+#     Name = "rds-${var.prefix}-sg"
+#   }
+# }
 
 
 # It will create Single RDS - MySQL is created. 
 resource "aws_db_instance" "primary" {
   allocated_storage           = 30
-  vpc_security_group_ids      = [aws_security_group.sg.id]
+  vpc_security_group_ids      = [var.security_group_id]
   db_subnet_group_name        = aws_db_subnet_group.subnet_groups.id
   db_name                     = "${var.prefix}main"
   engine                      = "mysql"
