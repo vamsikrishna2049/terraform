@@ -11,7 +11,7 @@ resource "aws_security_group_rule" "bastion_to_app" {
 
 resource "aws_security_group_rule" "db_to_app" {
   security_group_id        = aws_security_group.AppSG.id
-  description              = "Allows traffic from Data"
+  description              = "Allows traffic from DbSG"
   type                     = "ingress"
   from_port                = 22
   to_port                  = 22
@@ -33,7 +33,7 @@ resource "aws_security_group_rule" "app_to_web" {
 #Allowing the traffic to Baston SG from Database SG 
 resource "aws_security_group_rule" "database_to_bastion" {
   security_group_id        = aws_security_group.BastionHostSG.id
-  description              = "Allows traffic from DB"
+  description              = "Allows traffic from DbSG"
   type                     = "ingress"
   from_port                = 3306
   to_port                  = 3306

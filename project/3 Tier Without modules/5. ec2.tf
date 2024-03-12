@@ -14,7 +14,7 @@ resource "aws_instance" "WebServer" {
 }
 
 #Provisioning the Baston Host(EC2 instance) in Public subnet - Baston Host Security Group
-resource "aws_instance" "BastonHost" {
+resource "aws_instance" "BastionHost" {
   ami                         = var.ami_id
   instance_type               = var.instance_type
   key_name                    = "vockey" #It was already created via management console. If you can also create by define key pair module.
@@ -40,4 +40,3 @@ resource "aws_instance" "AppServer" {
   # User data script to provision the App server based on the Linux distribution
   user_data = file("${path.module}/script-app.sh")
 }
-

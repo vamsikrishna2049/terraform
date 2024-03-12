@@ -8,10 +8,10 @@ resource "aws_db_subnet_group" "subnet_groups" {
   }
 }
 
-It will create Single RDS - MySQL is created. 
+#It will create Single RDS - MySQL is created. 
 resource "aws_db_instance" "primary" {
  allocated_storage           = 30
- vpc_security_group_ids      = [aws_security_group.DB_SG.id]
+ vpc_security_group_ids      = [aws_security_group.DbSG.id]
  db_subnet_group_name        = aws_db_subnet_group.subnet_groups.id
  db_name                     = "${var.prefix}main"
  engine                      = var.engineType
