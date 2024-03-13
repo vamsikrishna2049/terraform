@@ -313,8 +313,8 @@ resource "aws_security_group_rule" "db_to_app" {
   security_group_id        = aws_security_group.AppSG.id
   description              = "Allows traffic from DbSG"
   type                     = "ingress"
-  from_port                = 22
-  to_port                  = 22
+  from_port                = 3306
+  to_port                  = 3306
   protocol                 = "tcp"
   source_security_group_id = aws_security_group.DbSG.id
 }

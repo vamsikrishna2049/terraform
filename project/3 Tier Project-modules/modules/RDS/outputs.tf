@@ -1,3 +1,3 @@
-output "rds_instance_id" {
+output "rds_instance_endpoint" {
   value = aws_db_instance.primary.endpoint
 }

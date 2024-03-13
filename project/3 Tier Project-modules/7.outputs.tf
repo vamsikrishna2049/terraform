@@ -44,7 +44,7 @@ output "DbSG-security_group" {
   value = module.module_vpc.DbSGID
 }
 
-# #################### EC2 ####################
+#################### EC2 ####################
 output "webServerId" {
   value = module.module_ec2.WebServerIds
 }
@@ -55,4 +55,9 @@ output "BastionHostId" {
 
 output "AppServerId" {
   value = module.module_ec2.AppServerIds
+}
+
+#################### RDS ####################
+output "RDS" {
+  value = module.module_rds.rds_instance_endpoint
 }

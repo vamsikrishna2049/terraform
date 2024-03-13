@@ -1,6 +1,6 @@
 #Provisioning the Web Server(EC2 instance) in Public subnet -Web Security Group
 resource "aws_instance" "WebServer" {
-  count                       = var.environment == "production" ? 4 : 2
+  count                       = var.environment == "production" ? 4 : 2 #If environment is production then it will provision 4 ec2 instances. else it will provision 2 instances.
   ami                         = var.ami_id
   instance_type               = var.instance_type
   key_name                    = "vockey"
@@ -29,7 +29,7 @@ resource "aws_instance" "BastionHost" {
 
 #Provisioning the App Server(EC2 instance) in Private subnet -App Security Group
 resource "aws_instance" "AppServer" {
-  count                       = var.environment == "production" ? 4 : 2
+  count                       = var.environment == "production" ? 4 : 2 #If environment is production then it will provision 4 ec2 instances. else it will provision 2 instances.
   ami                         = var.ami_id
   instance_type               = var.instance_type
   key_name                    = "vockey"

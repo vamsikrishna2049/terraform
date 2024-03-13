@@ -11,7 +11,6 @@ variable "pvt_sn3" {}
 variable "instance_type" {}
 variable "ami_id" {}
 variable "templateVersion" {}
-
 variable "environment" {}
 
 variable "backup_retention_period" {
@@ -19,7 +18,6 @@ variable "backup_retention_period" {
   type        = number
   default     = 7
 }
-
 variable "backup_window" {
   description = "Backup window for the RDS instance"
   type        = string
