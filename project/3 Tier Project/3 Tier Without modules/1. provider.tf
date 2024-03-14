@@ -13,9 +13,4 @@ terraform {
       version = "~> 4.0"
     }
   }
-  #   backend "s3" {
-  #     bucket = "my-tf-example-bucket"
-  #     key    = "devmodules.tfstate"
-  #     region = "us-east-2"
-  #   }
 }

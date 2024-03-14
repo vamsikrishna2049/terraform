@@ -17,4 +17,3 @@ variable "pub_sn_cidr2" {}
 variable "pub_sn_cidr3" {}
 variable "pvt_sn_cidr1" {}
 variable "pvt_sn_cidr2" {}
-variable "pvt_sn_cidr3" {}

@@ -52,8 +52,3 @@ variable "pvt_sn_cidr2" {
   description = "Availability Zones"
   type        = string
 }
-
-variable "pvt_sn_cidr3" {
-  description = "Availability Zones"
-  type        = string
-}

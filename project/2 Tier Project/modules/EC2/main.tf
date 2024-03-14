@@ -4,8 +4,8 @@ resource "aws_instance" "public_subnet" {
   ami                         = var.ami_id
   instance_type               = var.instance_type
   key_name                    = "vockey" # It was already available. If not create a new keypair and mention here.
-  subnet_id                   = element([var.public_subnet1.id, var.public_subnet2], count.index % 2)
-  vpc_security_group_ids      = [var.sg_name]
+  subnet_id                   = element([var.public_subnet1, var.public_subnet2], count.index % 2)
+  vpc_security_group_ids      = [var.web_security_group_id]
   associate_public_ip_address = true
   user_data                   = file("${path.module}/script.sh")
 

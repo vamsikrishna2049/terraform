@@ -13,11 +13,6 @@ variable "environment" {
   type        = string
 }
 
-variable "sg_name" {
-  description = "VPC Security Group"
-  type        = string
-}
-
 variable "prefix" {
   description = "Name of the module"
   type        = string
@@ -25,3 +20,5 @@ variable "prefix" {
 
 variable "public_subnet2" {}
 variable "public_subnet1" {}
+
+variable "web_security_group_id" {}

@@ -1,8 +1,3 @@
-#Module Name
-output "prefix" {
-  value = var.prefix
-}
-
 #VPCID
 output "vpc_id" {
   value = aws_vpc.main.id
@@ -38,26 +33,12 @@ output "private_subnet_2" {
   value = aws_subnet.pvt_sn2.id
 }
 
-output "private_subnet_3" {
-  value = aws_subnet.pvt_sn3.id
+#Web - Security Groups
+output "web_security_group_id" {
+  value = aws_security_group.WebSG.id
 }
 
-#Internet Gateway
-output "internet_gateway_id" {
-  value = aws_internet_gateway.igw.id
-}
-
-#Security Groups
-output "security_group_id" {
-  value = aws_security_group.tf-sg.id
-}
-
-#Routing Tables-Public
-output "public_routing_table" {
-  value = aws_route_table.pub.id
-}
-
-#Routing Tables-Private
-output "private_routing_table" {
-  value = aws_route_table.pvt.id
+#Data Base - Security Groups
+output "rds_security_group_id" {
+  value = aws_security_group.DbSG.id
 }
