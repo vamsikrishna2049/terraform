@@ -3,17 +3,18 @@ resource "aws_vpc" "white" {
   cidr_block           = var.white_vpc_cidr_block
   enable_dns_hostnames = "true"
   tags = {
-    Name = var.white_vpc
+    Name = "${var.white_vpc}-vpc"
   }
 }
 
 #subnet creation in White VPC
 resource "aws_subnet" "white" {
+  count                   = var.white_subnet_count
   depends_on              = [aws_vpc.white]
   vpc_id                  = aws_vpc.white.id
-  cidr_block              = var.white_subnet_cidr_block
+  cidr_block              = element(var.white_subnet_cidr_block, count.index)
   map_public_ip_on_launch = "true"
-  availability_zone       = var.white_subnet_az
+  availability_zone       = element(var.white_subnet_az, count.index)
   tags = {
     Name = "${var.white_vpc}-subnet"
   }
@@ -36,6 +37,11 @@ resource "aws_route_table" "white" {
     gateway_id = aws_internet_gateway.white.id
   }
 
+  route {
+    cidr_block = "10.0.0.0/16"
+    gateway_id = aws_vpc_peering_connection.red_to_white.id
+  }
+
   tags = {
     Name = "${var.white_vpc}-white-rt"
   }
@@ -43,7 +49,8 @@ resource "aws_route_table" "white" {
 
 #Edit subnet associations White-Subnet
 resource "aws_route_table_association" "white_sn_ass" {
-  subnet_id      = aws_subnet.white.id
+  count          = var.white_subnet_count
+  subnet_id      = element(aws_subnet.white.*.id, count.index)
   route_table_id = aws_route_table.white.id
 }
 
@@ -71,23 +78,3 @@ resource "aws_security_group" "white_TF_SG" {
     Name = "${var.white_vpc}-sg"
   }
 }
-
-
-#Note:
-#Allow All Traffic 
-# ingress {
-#   #description = "Blue VPC Allow In-Bound Traffic"
-#   from_port   = 0
-#   to_port     = 0
-#   protocol    = -1 # All
-#   cidr_blocks = ["0.0.0.0/0"]
-# }
-
-#Allow All TCP Traffic
-# ingress {
-#   #description = "Blue VPC Allow In-Bound TCP Traffic"
-#   from_port   = 0
-#   to_port     = 65535 # All TCP ports
-#   protocol    = "tcp"
-#   cidr_blocks = ["0.0.0.0/0"]
-# }
