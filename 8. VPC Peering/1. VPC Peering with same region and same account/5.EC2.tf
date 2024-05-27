@@ -7,25 +7,27 @@
 #   }
 # }
 
-# # Define the EC2 instance in the Red VPC with RHEL
-# resource "aws_instance" "rhel" {
-#   vpc_security_group_ids = [aws_security_group.red_TF_SG.id] # Use the ID of the security group created earlier
-#   subnet_id              = aws_subnet.red.id                 # Use the ID of the public subnet in the red VPC
-#   ami                    = var.red_rhel_ami_id
-#   instance_type          = "t2.micro"
-#   key_name               = "TFCode"
-#   tags = {
-#     Name = "${var.red_vpc}-rhel"
-#   }
-# }
+# Define the EC2 instance in the Red VPC with RHEL
+resource "aws_instance" "rhel" {
+  count                  = var.red_subnet_count
+  vpc_security_group_ids = [aws_security_group.red_TF_SG.id]         # Use the ID of the security group created earlier
+  subnet_id              = element(aws_subnet.red.*.id, count.index) # Use the ID of the public subnet in the red VPC
+  ami                    = var.red_rhel_ami_id
+  instance_type          = var.instance_type
+  key_name               = "key" #It was already available in management console
+  tags = {
+    Name = "${var.red_vpc}-rhel"
+  }
+}
 
 # Define the EC2 instance in the White VPC with Ubuntu
 resource "aws_instance" "pub-ubuntu" {
+  count                  = var.white_subnet_count
   vpc_security_group_ids = [aws_security_group.white_TF_SG.id]
-  subnet_id              = aws_subnet.white.id
+  subnet_id              = element(aws_subnet.white.*.id, count.index)
   ami                    = var.white_ubuntu_ami_id
-  instance_type          = "t2.micro"
-  key_name               = "TFCode"
+  instance_type          = var.instance_type
+  key_name               = "key" #It was already available in management console
   tags = {
     Name = "${var.white_vpc}-ubuntu"
   }
