@@ -15,8 +15,8 @@ output "security_group_id" {
 
 #EC2 Instance Public IP Address
 output "instance_public_ips" {
-    description = "Public IP addresses of EC2 instances"
-  value = aws_instance.web[*].public_ip
+  description = "Public IP addresses of EC2 instances"
+  value       = aws_instance.web[*].public_ip
 }
 
 # output "load_balancer_dns" {

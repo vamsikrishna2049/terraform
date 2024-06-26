@@ -107,9 +107,9 @@ resource "aws_instance" "web" {
   }
   connection {
     type        = "ssh"
-    user        = "ec2-user"                      # Default user name
+    user        = "ec2-user"            # Default user name
     private_key = file("./keypair.pem") # Adjust the path to your SSH private key
-    host        = self.public_ip                  # Use self.public_ip to access the public IP of each instance
+    host        = self.public_ip        # Use self.public_ip to access the public IP of each instance
   }
 
   tags = {
