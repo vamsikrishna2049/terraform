@@ -5,7 +5,7 @@ vpc_name = "tf-vpc"
 vpc_cidr_block = "10.0.0.0/16"
 
 #Total Public SUbnet's are created
-pub_subnet_count = "2"
+pub_subnet_count = "3"
 
 # Public Subnet CIDR Range
 pub_subnet_cidr_block = ["10.0.1.0/24", "10.0.2.0/24", "10.0.3.0/24"]
@@ -14,7 +14,7 @@ pub_subnet_cidr_block = ["10.0.1.0/24", "10.0.2.0/24", "10.0.3.0/24"]
 azs = ["us-east-1a", "us-east-1b", "us-east-1c"]
 
 #Instance Count
-instance_count = 0
+instance_count = 1
 
 #Instance Type
 instance_type = "t2.nano"
@@ -23,4 +23,4 @@ instance_type = "t2.nano"
 ami_id = "ami-08a0d1e16fc3f61ea"
 
 #Key Pair Name
-key_name = "Test-KeyPair"
+key_name = "keypair"

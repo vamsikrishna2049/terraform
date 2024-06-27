@@ -83,7 +83,7 @@ variable "ami_id" {
   default     = "ami-08a0d1e16fc3f61ea"
 }
 
-#Key Pair Name - Management Console
+#Key Pair Name - already available at Management Console
 variable "key_name" {
   description = "SSH key name for EC2 instances"
   type        = string

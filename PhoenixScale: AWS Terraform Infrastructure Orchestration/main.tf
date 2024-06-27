@@ -90,8 +90,6 @@ resource "aws_instance" "web" {
   key_name                    = var.key_name      # Replace with your key pair name
 
   security_groups = [aws_security_group.web_sg.id]
-
-
   provisioner "remote-exec" {
     inline = [
       "sudo yum update -y",          # Update package repositories (for Amazon Linux)
