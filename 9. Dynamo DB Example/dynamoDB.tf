@@ -1,16 +1,29 @@
+# Creating a DynamoDB Table
+resource "aws_dynamodb_table" "state_lock" {
+  name         = "practisedomain.cloud"  # DynamoDB table name
+  hash_key     = "LockID"                # Partition key name
+  billing_mode = "PROVISIONED"           # Use provisioned throughput mode
+  
+  # Attribute definitions
+  attribute {
+    name = "LockID"
+    type = "S"  # String type for LockID
+  }
 
+  # Provisioned throughput settings
+  provisioned_throughput {
+    read_capacity  = 5
+    write_capacity = 5
+  }
 
-# # Creating a DynamoDB Table
-# resource "aws_dynamodb_table" "terraform_state_lock_table" {
-#   name         = "tf-state-files"
-#   billing_mode = "PAY_PER_REQUEST"
-#   hash_key     = "LockID"
-#   attribute {
-#     name = "LockID"
-#     type = "S"
-#   }
-# }
+  tags = {
+    Name        = "Terraform State Lock"
+    Environment = "Production"
+  }
+}
 
+# Backend Configuration (Once the table is created, then only you need to use this below block)
+# backend.tf
 # # terraform {
 # #   backend "s3" {
 # #     bucket = "tf-dynamodb-state-file"
