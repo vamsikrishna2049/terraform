@@ -65,8 +65,7 @@ resource "aws_dynamodb_global_table" "practisedomain_cloud" {
 }
 
 ```
-===========================================================================================================================================================================================================================================================================================
-stream_enabled
+==========================================================================================================================================================================================# stream_enabled
 Description: This attribute determines whether DynamoDB Streams are enabled for the table. DynamoDB Streams capture changes to items in your DynamoDB table, and you can use them for real-time data processing, auditing, or triggering other actions based on changes to the table.
 
 Values:
@@ -77,7 +76,7 @@ Default: false (Streams are disabled by default).
 Usage: 
 If you want to track changes (such as inserts, updates, and deletes) to items in your DynamoDB table, you would set stream_enabled = true.
 ===========================================================================================================================================================================================================================================================================================
-stream_view_type
+# stream_view_type
 Description: This attribute defines the information that will be captured in the DynamoDB Stream when changes occur in the table. DynamoDB Streams allow you to capture different types of changes to your data, and this setting controls the content that will be written to the stream.
 
 Values:
@@ -106,12 +105,4 @@ PROVISIONED: Used when you want to specify the exact amount of read and write ca
 PAY_PER_REQUEST: Used when you prefer to have DynamoDB automatically adjust to traffic spikes without specifying capacity upfront.
 
 billing_mode = "PROVISIONED"
-===========================================================================================================================================================================================================================================================================================
-
-
-
-
-
-
-
-===========================================================================================================================================================================================================================================================================================
+=========================================================================================================================================================================================
