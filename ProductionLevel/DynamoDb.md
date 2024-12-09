@@ -71,9 +71,9 @@ resource "aws_dynamodb_global_table" "practisedomain_cloud" {
 Description: This attribute determines whether DynamoDB Streams are enabled for the table. DynamoDB Streams capture changes to items in your DynamoDB table, and you can use them for real-time data processing, auditing, or triggering other actions based on changes to the table.
 
 Values:
-true: DynamoDB Streams are enabled for the table.
-<br>false: DynamoDB Streams are disabled.<br>
-Default: false (Streams are disabled by default).
+<br>Default: false (Streams are disabled by default).
+<br>**true:** DynamoDB Streams are enabled for the table.
+<br>**false:** DynamoDB Streams are disabled.<br>
 
 **Usage:** 
 If you want to track changes (such as inserts, updates, and deletes) to items in your DynamoDB table, you would set stream_enabled = true.<br>
@@ -95,7 +95,6 @@ stream_view_type = "NEW_AND_OLD_IMAGES"
 
 ## billing_mode
 Description: This attribute determines the pricing model used for read and write throughput in the DynamoDB table. DynamoDB offers two billing modes:
-
 <br>**Provisioned:** You specify the read and write capacity units for the table. You pay for the throughput capacity you provision, regardless of whether it's used.
 <br>**On-Demand:** DynamoDB automatically adjusts throughput capacity to handle incoming traffic. You pay only for the read and write requests that you actually use. This mode is more flexible and can scale to handle unpredictable workloads.
 
