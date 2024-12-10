@@ -1,6 +1,6 @@
 # multi-region DynamoDB architecture
 
-## Key Benefits of This Setup:
-**1. Disaster Recovery:** By replicating the DynamoDB table across regions, this configuration ensures data is resilient to region-level failures.
+## Key Benefits of This Setup:<br>
+**1. Disaster Recovery:** By replicating the DynamoDB table across regions, this configuration ensures data is resilient to region-level failures.<br>
 **2. Global Application Support:** This can support global applications by providing low-latency access to DynamoDB data in multiple regions.
-**3. Data Backup/Archiving:** Exporting DynamoDB table data to an S3 bucket provides a way to back up data or perform long-term storage and processing.
+<br>**3. Data Backup/Archiving:** Exporting DynamoDB table data to an S3 bucket provides a way to back up data or perform long-term storage and processing.
