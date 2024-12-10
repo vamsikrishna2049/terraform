@@ -6,10 +6,3 @@ terraform {
     }
   }
 }
-
-provider "aws" {
-  # Configuration options
-  access_key=""
-  secret_access_key=""
-  region="us-east-1"
-}
