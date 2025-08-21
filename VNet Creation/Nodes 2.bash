@@ -1,7 +1,10 @@
-pre-Commit Hooks
+# pre-Commit Hooks
 
+```bash
 nano .git/hooks/pre-commit
+```
 
+```bash
 #!/bin/bash
 # Pre-commit hook for Terraform
 
@@ -35,8 +38,10 @@ else
 fi
 
 echo "✔️ Pre-commit checks passed. Proceeding with commit."
+```
 
 
-
-Make it executable:
+# Make it executable:
+```bash
 chmod +x .git/hooks/pre-commit
+```

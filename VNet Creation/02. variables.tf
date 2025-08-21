@@ -31,3 +31,9 @@ variable "pvt_address_space" {
   type        = list(string)
   default     = ["10.0.10.0/16"]
 }
+
+variable "allowed_ports" {
+  description = "List of allowed inbound ports"
+  type        = list(number)
+  default     = [22, 80, 443, 5432, 3306] #Which you want to allow
+}
