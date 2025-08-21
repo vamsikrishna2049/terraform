@@ -1,0 +1,42 @@
+pre-Commit Hooks
+
+nano .git/hooks/pre-commit
+
+#!/bin/bash
+# Pre-commit hook for Terraform
+
+echo "🔍 Running terraform fmt..."
+terraform fmt -recursive
+if [ $? -ne 0 ]; then
+  echo "❌ terraform fmt failed. Please fix formatting before commit."
+  exit 1
+fi
+
+echo "🔍 Running terraform validate..."
+terraform validate
+if [ $? -ne 0 ]; then
+  echo "❌ terraform validate failed. Fix errors before commit."
+  exit 1
+fi
+
+echo "🔍 Running terraform plan..."
+terraform plan -detailed-exitcode -out=tfplan
+PLAN_EXIT=$?
+
+if [ $PLAN_EXIT -eq 1 ]; then
+  echo "❌ terraform plan failed. Fix errors before commit."
+  exit 1
+elif [ $PLAN_EXIT -eq 2 ]; then
+  echo "⚠️ terraform plan has changes."
+  # Uncomment below line if you want to block commits when there are changes
+  # exit 1
+else
+  echo "✅ terraform plan shows no changes."
+fi
+
+echo "✔️ Pre-commit checks passed. Proceeding with commit."
+
+
+
+Make it executable:
+chmod +x .git/hooks/pre-commit
