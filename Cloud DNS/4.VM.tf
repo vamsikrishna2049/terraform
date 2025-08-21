@@ -27,11 +27,11 @@ resource "azurerm_network_interface" "main" {
 
 # Azure VM
 resource "azurerm_virtual_machine" "main" {
-  name                  = "testing-vm"
+  name                  = var.vm_name
   location              = var.location
   resource_group_name   = var.resource_group_name
   network_interface_ids = [azurerm_network_interface.main.id]
-  vm_size               = "Standard_DS1_v2"
+  vm_size               = var.vm_size
 
   storage_image_reference {
     publisher = "Canonical"
@@ -44,7 +44,7 @@ resource "azurerm_virtual_machine" "main" {
     name              = "myosdisk1"
     caching           = "ReadWrite"
     create_option     = "FromImage"
-    managed_disk_type = "Standard_LRS"
+    managed_disk_type = var.managed_disk_type
   }
 
   os_profile {
