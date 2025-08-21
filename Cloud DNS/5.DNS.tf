@@ -5,7 +5,7 @@ resource "azurerm_dns_zone" "dns" {
 }
 
 # Example A Record
-resource "azurerm_dns_a_record" "nginx" {
+resource "azurerm_dns_a_record" "A1Rec" {
   name                = "nginx"
   zone_name           = azurerm_dns_zone.dns.name
   resource_group_name = var.resource_group_name
