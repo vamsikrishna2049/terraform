@@ -7,7 +7,7 @@ resource "azurerm_public_ip" "PubIP" {
   sku                 = "Standard" #modern SKU that supports advanced networking & load balancers.
 
   tags = {
-    environment = "Production"
+    environment = var.tags
   }
 }
 
@@ -32,6 +32,14 @@ resource "azurerm_virtual_machine" "main" {
   resource_group_name   = var.resource_group_name
   network_interface_ids = [azurerm_network_interface.main.id]
   vm_size               = "Standard_DS1_v2"
+
+  depends_on = [azurerm_public_ip.PubIP, azurerm_network_interface.main]
+
+  # Uncomment this line to delete the OS disk automatically when deleting the VM
+  delete_os_disk_on_termination = true
+
+  # Uncomment this line to delete the data disks automatically when deleting the VM
+  delete_data_disks_on_termination = true
 
   storage_image_reference {
     publisher = "Canonical"
@@ -58,6 +66,6 @@ resource "azurerm_virtual_machine" "main" {
   }
 
   tags = {
-    environment = "Production"
+    environment = var.tags
   }
 }

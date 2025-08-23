@@ -10,6 +10,7 @@ resource "azurerm_subnet" "db" {
   resource_group_name  = var.resource_group_name
   virtual_network_name = azurerm_virtual_network.vnet.name
   address_prefixes     = ["10.0.2.0/24"]
+  depends_on           = [azurerm_virtual_network.vnet]
 
   delegation {
     name = "mysql_delegation"
@@ -27,6 +28,10 @@ resource "azurerm_subnet" "db" {
 resource "azurerm_private_dns_zone" "mysql" {
   name                = "privatelink.mysql.database.azure.com"
   resource_group_name = var.resource_group_name
+  depends_on          = [azurerm_subnet.db]
+  tags = {
+    environment = var.tags
+  }
 }
 
 resource "azurerm_private_dns_zone_virtual_network_link" "mysql_link" {
@@ -34,6 +39,9 @@ resource "azurerm_private_dns_zone_virtual_network_link" "mysql_link" {
   resource_group_name   = var.resource_group_name
   private_dns_zone_name = azurerm_private_dns_zone.mysql.name
   virtual_network_id    = azurerm_virtual_network.vnet.id
+  tags = {
+    environment = var.tags
+  }
 }
 
 resource "azurerm_mysql_flexible_server" "db" {
@@ -53,5 +61,13 @@ resource "azurerm_mysql_flexible_server" "db" {
 
   storage {
     size_gb = 32
+  }
+
+  depends_on = [
+    azurerm_private_dns_zone_virtual_network_link.mysql_link
+  ]
+
+  tags = {
+    environment = var.tags
   }
 }

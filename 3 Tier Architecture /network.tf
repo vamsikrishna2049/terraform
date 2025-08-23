@@ -5,7 +5,7 @@ resource "azurerm_virtual_network" "vnet" {
   resource_group_name = var.resource_group_name
   address_space       = var.vnet_address_space
   tags = {
-    environment = "Production"
+    environment = var.tags
   }
 }
 
@@ -38,7 +38,7 @@ resource "azurerm_route_table" "route_table" {
   }
 
   tags = {
-    environment = "Production"
+    environment = var.tags
   }
 }
 
@@ -76,7 +76,7 @@ resource "azurerm_network_security_group" "nsg" {
   }
 
   tags = {
-    environment = "Production"
+    environment = var.tags
   }
 }
 

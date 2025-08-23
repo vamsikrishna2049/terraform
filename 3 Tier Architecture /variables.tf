@@ -14,6 +14,12 @@ variable "location" {
   # default     = "eastus"   # optional default
 }
 
+variable "tags" {
+  description = "Deployment environment (e.g., dev, test, prod)"
+  type        = string
+  default     = "dev"
+}
+
 # Azure VNET
 variable "vnet_address_space" {
   description = "Address space for the Virtual Network"

@@ -1,4 +1,5 @@
 prefix = "Test"
+tags   = "Test"
 
 # Resource Group
 resource_group_name = "1-4cdf1f1f-playground-sandbox"
