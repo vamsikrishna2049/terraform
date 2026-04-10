@@ -6,10 +6,11 @@ pipeline {
   }
 
   stages {
+
     stage('Clone Repo') {
       steps {
         git branch: 'tf-gcp',
-          url: 'https://github.com/vamsikrishna2049/terraform.git'
+            url: 'https://github.com/vamsikrishna2049/terraform.git'
       }
     }
 
@@ -19,22 +20,15 @@ pipeline {
       }
     }
 
-    stage('Terraform Init') {
+    stage('Terraform') {
       steps {
-        sh 'terraform init'
+        dir('gcp-Jenkins/infra') {   
+          sh 'terraform init'
+          sh 'terraform plan'
+          sh 'terraform apply'
+        }
       }
     }
 
-    stage('Terraform Plan') {
-      steps {
-        sh 'terraform plan'
-      }
-    }
-
-    stage('Terraform Apply') {
-      steps {
-        sh 'terraform apply -auto-approve'
-      }
-    }
   }
 }
