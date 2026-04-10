@@ -1,0 +1,40 @@
+pipeline {
+  agent any
+
+  environment {
+    PROJECT_ID = "mystic-centaur-297207"
+  }
+
+  stages {
+    stage('Clone Repo') {
+      steps {
+        git branch: 'tf-gcp',
+          url: 'https://github.com/vamsikrishna2049/terraform.git'
+      }
+    }
+
+    stage('Authenticate (WIF)') {
+      steps {
+        sh 'echo "Using Workload Identity Federation (OIDC)"'
+      }
+    }
+
+    stage('Terraform Init') {
+      steps {
+        sh 'terraform init'
+      }
+    }
+
+    stage('Terraform Plan') {
+      steps {
+        sh 'terraform plan'
+      }
+    }
+
+    stage('Terraform Apply') {
+      steps {
+        sh 'terraform apply -auto-approve'
+      }
+    }
+  }
+}
