@@ -1,0 +1,46 @@
+pipeline {
+        TF_IN_AUTOMATION = "true"
+    }
+
+    stages {
+
+        stage('Checkout') {
+            steps {
+                git 'https://your-repo-url.git'
+            }
+        }
+
+        stage('Authenticate to GCP (WIF)') {
+            steps {
+                sh '''
+                echo "Authenticating using Workload Identity Federation..."
+                export GOOGLE_OAUTH_ACCESS_TOKEN=$(gcloud auth print-access-token)
+                '''
+            }
+        }
+
+        stage('Terraform Init') {
+            steps {
+                sh 'terraform init'
+            }
+        }
+
+        stage('Terraform Plan') {
+            steps {
+                sh 'terraform plan -var-file=terraform.tfvars'
+            }
+        }
+
+        stage('Manual Approval') {
+            steps {
+                input message: 'Approve Apply?'
+            }
+        }
+
+        stage('Terraform Apply') {
+            steps {
+                sh 'terraform apply -auto-approve -var-file=terraform.tfvars'
+            }
+        }
+    }
+}
