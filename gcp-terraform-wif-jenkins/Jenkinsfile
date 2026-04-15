@@ -1,43 +1,54 @@
 pipeline {
+    agent any
+
+    environment {
         TF_IN_AUTOMATION = "true"
+        GOOGLE_APPLICATION_CREDENTIALS = credentials('gcp-sa-key')
     }
 
     stages {
 
         stage('Checkout') {
             steps {
-                git 'https://your-repo-url.git'
+                git branch: 'tf-gcp',
+                    url: 'https://github.com/vamsikrishna2049/terraform.git'
             }
         }
 
         stage('Authenticate to GCP (WIF)') {
             steps {
                 sh '''
-                echo "Authenticating using Workload Identity Federation..."
-                export GOOGLE_OAUTH_ACCESS_TOKEN=$(gcloud auth print-access-token)
+                    echo "Using Workload Identity Federation via ADC..."
+                    gcloud auth application-default print-access-token
                 '''
             }
         }
 
-        stage('Terraform Init') {
+        stage('Init') {
             steps {
-                sh 'terraform init'
+                sh 'terraform init -upgrade'
             }
         }
 
-        stage('Terraform Plan') {
+        stage('Validate') {
+            steps {
+                sh 'terraform validate'
+            }
+        }
+
+        stage('Plan') {
             steps {
                 sh 'terraform plan -var-file=terraform.tfvars'
             }
         }
 
-        stage('Manual Approval') {
+        stage('Approval') {
             steps {
                 input message: 'Approve Apply?'
             }
         }
 
-        stage('Terraform Apply') {
+        stage('Apply') {
             steps {
                 sh 'terraform apply -auto-approve -var-file=terraform.tfvars'
             }
