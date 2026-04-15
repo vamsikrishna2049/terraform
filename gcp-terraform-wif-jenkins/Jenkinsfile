@@ -2,53 +2,50 @@ pipeline {
     agent any
 
     environment {
+        PROJECT_ID = "mystic-centaur-297207"
         TF_IN_AUTOMATION = "true"
-        GOOGLE_APPLICATION_CREDENTIALS = credentials('gcp-sa-key')
     }
 
     stages {
 
         stage('Checkout') {
             steps {
-                git branch: 'tf-gcp',
-                    url: 'https://github.com/vamsikrishna2049/terraform.git'
+                git branch: 'tf-gcp', url: 'https://github.com/vamsikrishna2049/terraform.git'
             }
         }
 
         stage('Authenticate to GCP (WIF)') {
             steps {
                 sh '''
-                    echo "Using Workload Identity Federation via ADC..."
-                    gcloud auth application-default print-access-token
+                echo "Authenticating via Workload Identity Federation..."
+
+                # This assumes Jenkins is configured with OIDC
+                gcloud auth login --brief || true
+
+                export GOOGLE_OAUTH_ACCESS_TOKEN=$(gcloud auth print-access-token)
                 '''
             }
         }
 
-        stage('Init') {
+        stage('Terraform Init') {
             steps {
-                sh 'terraform init -upgrade'
+                sh 'terraform init'
             }
         }
 
-        stage('Validate') {
-            steps {
-                sh 'terraform validate'
-            }
-        }
-
-        stage('Plan') {
+        stage('Terraform Plan') {
             steps {
                 sh 'terraform plan -var-file=terraform.tfvars'
             }
         }
 
-        stage('Approval') {
+        stage('Manual Approval') {
             steps {
-                input message: 'Approve Apply?'
+                input message: 'Approve Terraform Apply?'
             }
         }
 
-        stage('Apply') {
+        stage('Terraform Apply') {
             steps {
                 sh 'terraform apply -auto-approve -var-file=terraform.tfvars'
             }
